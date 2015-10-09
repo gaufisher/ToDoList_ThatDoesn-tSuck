@@ -18,7 +18,7 @@ public class ToDoListData implements ToDoDao {
      */
     @Override
     public ArrayList<Task> getTasks() {
-        return null;
+        return list;
     }
 
     @Override
@@ -27,38 +27,42 @@ public class ToDoListData implements ToDoDao {
     }
 
     @Override
-    public void displayTasks() {
-
-    }
-
-    @Override
     public void updateTask(int id, String title) {
-
+        list.get(id).setTitle(title);
     }
 
     @Override
     public void removeTask(int id) {
-
+        for (int i = 0; i < list.size(); i++) {
+            list.remove(i);
+        }
     }
 
     @Override
     public void markTaskComplete(int id) {
-
+        list.get(id).setComplete(true);
     }
 
     @Override
     public void markTaskIncomplete(int id) {
-
+        list.get(id).setComplete(false);
     }
 
     @Override
-    public void showCompleteTasks() {
-
+    public ArrayList<Task> showCompleteTasks() {
+        ArrayList<Task> completedList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).isComplete()){
+                completedList.add(list.get(i));
+            }
+        }
+        return completedList;
     }
 
     @Override
-    public void showIncompleteTasks() {
+    public ArrayList<Task> showIncompleteTasks() {
 
+        return list;
     }
 
     @Override
@@ -77,8 +81,9 @@ public class ToDoListData implements ToDoDao {
     }
 
     @Override
-    public void showTasksInProgress() {
+    public ArrayList<Task> showTasksInProgress() {
 
+        return list;
     }
 
     @Override
@@ -87,7 +92,8 @@ public class ToDoListData implements ToDoDao {
     }
 
     @Override
-    public void showPastDue() {
+    public ArrayList<Task> showPastDue() {
 
+        return list;
     }
 }
