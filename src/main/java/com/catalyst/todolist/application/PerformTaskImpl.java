@@ -19,7 +19,7 @@ public class PerformTaskImpl implements PerformTask{
                 break;
 
             case "4":
-               removeTask();
+                removeTask();
                 if(y != 0){
                     divide();
                 }
@@ -77,12 +77,19 @@ public class PerformTaskImpl implements PerformTask{
 
     public void addTask(){
         takeInput();
-    //  takeInput() should return the task to add, combined with any other fields a task needs to have.
-    //  append the input task to the existing to do list
+        //  takeInput() should return the task to add, combined with any other fields a task needs to have.
+        //  append the input task to the existing to do list
     }
 
     public void displayTasks(){
         getTasks();
     }
 
+    public void setToDoDao(ToDoDao toDoDao) {
+
+    }
+
+    public List<Item> getItems() {
+        return null;
+    }
 }
