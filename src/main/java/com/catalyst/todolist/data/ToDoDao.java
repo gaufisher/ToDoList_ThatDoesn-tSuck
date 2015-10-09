@@ -15,9 +15,5 @@ public interface ToDoDao {
      */
     ArrayList<Task> getList();
 
-    /**
-     * Use this to set or save a list.
-     * @param list
-     */
-    void setLists(ArrayList<Task> list);
+    Task getSingleTask(int id);
 }
