@@ -8,5 +8,5 @@ public interface ToDoDao {
      * Use this to retrieve a list of all tasks.
      * @return a List<Task> object containing all employees.
      */
-    List<Task> getList();
+    List<Task> getTasks();
 }
