@@ -1,9 +1,12 @@
 package com.catalyst.todolist.application;
 
+import com.catalyst.todolist.data.ToDoDao;
+import com.catalyst.todolist.entities.Task;
+
 /**
  * Created by gfisher on 10/9/2015.
  */
-public class PerformTaskImpl implements PerformTask{
+public class PerformUpdateImpl implements PerformUpdate {
     public void run(String menuNumber){
         switch(menuNumber){
             case "1":
@@ -20,17 +23,10 @@ public class PerformTaskImpl implements PerformTask{
 
             case "4":
                 removeTask();
-                if(y != 0){
-                    divide();
-                }
-                else{
-                    System.out.println("You can't divide by zero!");
-                }
                 break;
 
             case "5":
                 markTaskComplete();
-                power();
                 break;
 
             case "6":
@@ -89,7 +85,7 @@ public class PerformTaskImpl implements PerformTask{
 
     }
 
-    public List<Item> getItems() {
+    public List<Task> getTasks() {
         return null;
     }
 }

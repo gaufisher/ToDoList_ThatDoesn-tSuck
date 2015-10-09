@@ -10,6 +10,10 @@ public class Task {
     private Description description;
 
     public Task() {
+        this.task = "";
+        this.id = 0;
+        this.complete = false;
+        this.description = null;
     }
 
     public Task(String task, int id, boolean isComplete) {
