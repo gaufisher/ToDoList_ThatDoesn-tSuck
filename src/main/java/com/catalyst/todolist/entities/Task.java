@@ -4,20 +4,20 @@ package com.catalyst.todolist.entities;
  * Created by ddelaney on 10/8/2015.
  */
 public class Task {
-    private String task;
+    private String title;
     private int id;
     private boolean complete;
     private Description description;
 
     public Task() {
-        this.task = "";
+        this.title = "";
         this.id = 0;
         this.complete = false;
         this.description = null;
     }
 
     public Task(String task, int id, boolean isComplete) {
-        this.task = task;
+        this.title = task;
         this.id = id;
         this.complete = isComplete;
         this.description = new Description();

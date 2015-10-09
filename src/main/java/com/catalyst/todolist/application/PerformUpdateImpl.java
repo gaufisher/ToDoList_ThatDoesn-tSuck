@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class PerformUpdateImpl implements PerformUpdate {
     private ToDoDao toDoDao;
+    private int counter=0;
 
 
     public void setToDoDao(ToDoDao toDoDao) {
@@ -22,16 +23,17 @@ public class PerformUpdateImpl implements PerformUpdate {
         return toDoDao.getTasks();
     }
 
-    public void addTask() {
-        toDoDao.addTask();
+    public void addTask(String title) {
+        counter++;
+        Task newTask = new Task(title, counter, false);
+        toDoDao.addTask(newTask);
     }
 
-    public void displayTasks() {
-
-    }
-
-    public void updateTask(int id String title) {
-
+    public void updateTask(int id, String title) {
+        Task toUpdate = toDoDao.getSingleTask(id);
+        toUpdate.getTitle().replaceAll(title);
+        toDoDao.addTask(toUpdate);
+        toDoDao.updateTask(id, title);
     }
 
     public void removeTask(int id) {
@@ -47,15 +49,15 @@ public class PerformUpdateImpl implements PerformUpdate {
     }
 
     public void showCompleteTasks() {
-
+        toDoDao.showCompleteTasks();
     }
 
     public void showIncompleteTasks() {
-
+        toDoDao.showIncompleteTasks();
     }
 
-    public void addDescription(int id) {
-
+    public void addDescription(int id String description) {
+        toDoDao.addDescription(id, description);
     }
 
     public void assignTask(int id) {
@@ -79,6 +81,7 @@ public class PerformUpdateImpl implements PerformUpdate {
     }
 
     public Task getSingleTask(int id){
+
         toDoDao.getSingleTask(id);
     }
 
