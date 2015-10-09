@@ -10,21 +10,84 @@ import java.util.ArrayList;
 public class ToDoListData implements ToDoDao {
     private ArrayList<Task> list;
 
+
     /**
      * Use this to retrieve a list of all tasks.
      *
      * @return a List<Task> object containing all employees.
      */
-    public ArrayList<Task> getList() {
-        return list;
+    @Override
+    public ArrayList<Task> getTasks() {
+        return null;
     }
 
-    public void addTask(String input){
+    @Override
+    public void addTask(Task task) {
+        list.add(task);
+    }
+
+    @Override
+    public void displayTasks() {
 
     }
 
-    public Task getSingleTask(int id){
-        
+    @Override
+    public void updateTask(int id, String title) {
+
     }
 
+    @Override
+    public void removeTask(int id) {
+
+    }
+
+    @Override
+    public void markTaskComplete(int id) {
+
+    }
+
+    @Override
+    public void markTaskIncomplete(int id) {
+
+    }
+
+    @Override
+    public void showCompleteTasks() {
+
+    }
+
+    @Override
+    public void showIncompleteTasks() {
+
+    }
+
+    @Override
+    public void addDescription(int id) {
+
+    }
+
+    @Override
+    public void assignTask(int id) {
+
+    }
+
+    @Override
+    public void markTaskInProgress(int id) {
+
+    }
+
+    @Override
+    public void showTasksInProgress() {
+
+    }
+
+    @Override
+    public void assignDueDate(int id) {
+
+    }
+
+    @Override
+    public void showPastDue() {
+
+    }
 }
