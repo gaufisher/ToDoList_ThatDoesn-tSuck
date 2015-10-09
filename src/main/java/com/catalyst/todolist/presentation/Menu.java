@@ -2,6 +2,7 @@ package com.catalyst.todolist.presentation;
 
 import com.catalyst.todolist.application.PerformUpdate;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -20,10 +21,10 @@ public class Menu {
             String input = scanner.nextLine();
             switch (input) {
                 case "1":
-                    performUpdate.addTask();
+                    performUpdate.addTask(getNewTitle());
                     break;
                 case "2":
-                    performUpdate.displayTasks();
+                    displayAllTasks();
                     break;
                 case "3":
                     performUpdate.updateTask(getTaskNumber(), getNewTitle());
@@ -87,6 +88,13 @@ public class Menu {
         System.out.println("13. Assign due date");
         System.out.println("14. Show past due");
         System.out.println("15. Exit");
+    }
+
+    private void displayAllTasks(){
+        ArrayList taskList = performUpdate.getTasks();
+        for (int i = 0; i < taskList.size(); i++) {
+            System.out.println(i + ". " + taskList.get(i));
+        }
     }
 
     private int getTaskNumber() {

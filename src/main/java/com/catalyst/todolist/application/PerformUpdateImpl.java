@@ -14,7 +14,6 @@ public class PerformUpdateImpl implements PerformUpdate {
     private ToDoDao toDoDao;
     private int counter=0;
 
-
     public void setToDoDao(ToDoDao toDoDao) {
         this.toDoDao = toDoDao;
     }
@@ -24,9 +23,11 @@ public class PerformUpdateImpl implements PerformUpdate {
     }
 
     public void addTask(String title) {
+
         counter++;
         Task newTask = new Task(title, counter, false);
         toDoDao.addTask(newTask);
+
     }
 
     public void updateTask(int id, String title) {

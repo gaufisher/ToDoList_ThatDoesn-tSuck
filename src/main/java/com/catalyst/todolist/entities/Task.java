@@ -16,19 +16,20 @@ public class Task {
         this.description = null;
     }
 
-    public Task(String task, int id, boolean isComplete) {
-        this.title = task;
+
+    public Task(String title, int id, boolean isComplete) {
+        this.title = title;
         this.id = id;
         this.complete = isComplete;
         this.description = new Description();
     }
 
-    public String getTask() {
-        return task;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTask(String task) {
-        this.task = task;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getId() {
@@ -53,5 +54,10 @@ public class Task {
 
     public void setDescription(Description description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return this.id + ", " + this.title + ", " + this.complete;
     }
 }
