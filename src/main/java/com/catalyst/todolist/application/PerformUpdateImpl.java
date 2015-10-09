@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class PerformUpdateImpl implements PerformUpdate {
     private ToDoDao toDoDao;
 
-
     public void setToDoDao(ToDoDao toDoDao) {
         this.toDoDao = toDoDao;
     }
@@ -22,8 +21,7 @@ public class PerformUpdateImpl implements PerformUpdate {
         return toDoDao.getTasks();
     }
 
-    public void addTask() {
-        toDoDao.addTask();
+    public void addTask(String title) {
     }
 
     public void displayTasks() {

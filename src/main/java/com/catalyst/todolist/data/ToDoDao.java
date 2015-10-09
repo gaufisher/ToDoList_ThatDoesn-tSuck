@@ -16,18 +16,17 @@ public interface ToDoDao {
 
     ArrayList<Task> getTasks();
     void addTask(Task task);
-    void displayTasks();
     void updateTask(int id, String title);
     void removeTask(int id);
     void markTaskComplete(int id);
     void markTaskIncomplete(int id);
-    void showCompleteTasks();
-    void showIncompleteTasks();
+    ArrayList<Task> showCompleteTasks();
+    ArrayList<Task> showIncompleteTasks();
     void addDescription(int id);
     void assignTask(int id);
     void markTaskInProgress(int id);
-    void showTasksInProgress();
+    ArrayList<Task> showTasksInProgress();
     void assignDueDate(int id);
-    void showPastDue();
+    ArrayList<Task> showPastDue();
 
 }
