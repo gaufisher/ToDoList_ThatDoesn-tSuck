@@ -79,7 +79,7 @@ public class Menu {
         System.out.println("1. Add task");
         System.out.println("2. Display task");
         System.out.println("3. Update task");
-        System.out.println("4. Remove tast");
+        System.out.println("4. Remove task");
         System.out.println("5. Mark task as complete");
         System.out.println("6. Mark task as incomplete");
         System.out.println("7. Show completed tasks");

@@ -15,64 +15,104 @@ public class ToDoListData implements ToDoDao {
     /**
      * Use this to retrieve a list of all tasks.
      *
-     * @return a List<Task> object containing all employees.
+     * @return a List<Task> object containing all tasks.
      */
     @Override
     public ArrayList<Task> getTasks() {
         return list;
     }
 
+
+    /**
+     * Use this to add a new task to the To Do List.
+     * @return void
+     */
     @Override
     public void addTask(Task task) {
 
         list.add(task);
     }
 
+
+    /**
+     * Use this to change the name of an existing task
+     * @return void
+     */
     @Override
     public void updateTask(int id, String title) {
-        list.get(id).setTitle(title);
-    }
-
-    @Override
-    public void removeTask(int id) {
-        for (int i = 0; i < list.size(); i++) {
-            list.remove(i);
+        for(int i=0; i < list.size(); i++) {
+            if (list.get(i).getId() == id) {
+                list.get(i).setTitle(title);
+            }
         }
     }
 
+
+    /**
+     * Use this to remove an existing task from the To Do List
+     * @return void
+     */
+    @Override
+    public void removeTask(int id) {
+                list.remove(getSingleTask(id));
+    }
+
+    /**
+     * Use this to mark a task as complete
+     * @return void
+     */
     @Override
     public void markTaskComplete(int id)
     {
-        list.get(id).setComplete(true);
+        getSingleTask(id).setComplete(true);
     }
 
+    /**
+     * Use this to mark a task as incomplete
+     * @return void
+     */
     @Override
     public void markTaskIncomplete(int id) {
-        list.get(id).setComplete(false);
+        getSingleTask(id).setComplete(false);
     }
 
+
+    /**
+     * Use this to show a list of only tasks that are completed
+     * I should probably be returning the completedList ArrayList to my presentation layer so it can present the list
+     * @return void because displayTasks() prints to the console.
+     */
     @Override
-    public ArrayList<Task> showCompleteTasks() {
+    public void showCompleteTasks() {
         ArrayList<Task> completedList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).isComplete()){
                 completedList.add(list.get(i));
             }
         }
-        return completedList;
+        displayTasks(completedList);
     }
 
+    /**
+     * Use this to show a list of only tasks that are incomplete
+     * Same story as showCompleteTasks()...I may have to move the output to the presentation layer.
+     * @return void because reasons.
+     */
     @Override
-    public ArrayList<Task> showIncompleteTasks() {
+    public void showIncompleteTasks() {
         ArrayList<Task> incompletedList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             if (!list.get(i).isComplete()){
                 incompletedList.add(list.get(i));
             }
         }
-        return incompletedList;
+        displayTasks(incompletedList);
     }
 
+    /**
+     * Use this to add or update a description of a Task
+     * @return void
+     */
     @Override
     public void addDescription(int id, String description) {
         list.get(id).setDescription(new Description(description));
@@ -89,9 +129,8 @@ public class ToDoListData implements ToDoDao {
     }
 
     @Override
-    public ArrayList<Task> showTasksInProgress() {
+    public void showTasksInProgress() {
 
-        return list;
     }
 
     @Override
@@ -105,6 +144,10 @@ public class ToDoListData implements ToDoDao {
         return list;
     }
 
+    /**
+     * Use this when you need to select a single Task object from the To Do List
+     * @return a Task object
+     */
     @Override
     public Task getSingleTask(int id){
         for(int i = 0; i < list.size(); i++){
@@ -114,4 +157,15 @@ public class ToDoListData implements ToDoDao {
         }
         return list.get(id);
     }
+
+    /**
+     * Use this for reasons unknown to mankind...possibly to print out a list from an array.
+     * @param list
+     */
+    private void displayTasks(ArrayList<Task> list){
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+    }
+
 }

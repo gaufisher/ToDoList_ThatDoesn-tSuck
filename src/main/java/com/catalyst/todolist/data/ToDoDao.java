@@ -20,12 +20,12 @@ public interface ToDoDao {
     void removeTask(int id);
     void markTaskComplete(int id);
     void markTaskIncomplete(int id);
-    ArrayList<Task> showCompleteTasks();
-    ArrayList<Task> showIncompleteTasks();
+    void showCompleteTasks();
+    void showIncompleteTasks();
     void addDescription(int id, String description);
     void assignTask(int id);
     void markTaskInProgress(int id);
-    ArrayList<Task> showTasksInProgress();
+    void showTasksInProgress();
     void assignDueDate(int id);
     ArrayList<Task> showPastDue();
     Task getSingleTask(int id);
