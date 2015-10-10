@@ -1,6 +1,8 @@
 package com.catalyst.todolist.presentation;
 
 import com.catalyst.todolist.application.PerformUpdate;
+import com.catalyst.todolist.application.PerformUpdateImpl;
+import com.catalyst.todolist.data.ToDoListData;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -39,13 +41,13 @@ public class Menu {
                     performUpdate.markTaskIncomplete(getTaskNumber());
                     break;
                 case "7":
-                    performUpdate.showCompleteTask();
+                    performUpdate.showCompleteTasks();
                     break;
                 case "8":
-                    performUpdate.showIncompleteTask();
+                    performUpdate.showIncompleteTasks();
                     break;
                 case "9":
-                    performUpdate.addDescription(getTaskNumber());
+                    performUpdate.addDescription(getTaskNumber(), getNewDescription());
                     break;
                 case "10":
                     performUpdate.assignTask(getTaskNumber());
@@ -54,10 +56,10 @@ public class Menu {
                     performUpdate.markTaskInProgress(getTaskNumber());
                     break;
                 case "12":
-                    performUpdate.showTaskInProgress();
+                    performUpdate.showTasksInProgress();
                     break;
                 case "13":
-                    performUpdate.assignDueDate();
+                    performUpdate.assignDueDate(getTaskNumber());
                     break;
                 case "14":
                     performUpdate.showPastDue();
@@ -117,14 +119,28 @@ public class Menu {
     private String getNewTitle() {
         String input;
         do {
-            System.out.println("Enter an new title:");
+            System.out.println("Enter a new title:");
             input = scanner.nextLine();
             if (input.equals("") || input == null)
                 System.out.println("Not a valid input");
             else
                 break;
         } while (true);
+        System.out.println("The title of the book will be "+ input);
+        return input;
+    }
 
+    private String getNewDescription() {
+        String input;
+        do{
+            System.out.println("Enter a description:");
+            input = scanner.nextLine();
+            if(input.equals("") || input == null)
+                System.out.println("Not a valid input");
+            else
+                break;
+        }while (true);
+        System.out.println("The description is: "+ input);
         return input;
     }
 

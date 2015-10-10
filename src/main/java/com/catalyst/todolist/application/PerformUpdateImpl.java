@@ -2,6 +2,7 @@ package com.catalyst.todolist.application;
 
 import com.catalyst.todolist.data.ToDoDao;
 import com.catalyst.todolist.entities.Task;
+import com.catalyst.todolist.entities.Description;
 import com.catalyst.todolist.presentation.Menu;
 
 import java.util.ArrayList;
@@ -23,7 +24,6 @@ public class PerformUpdateImpl implements PerformUpdate {
     }
 
     public void addTask(String title) {
-
         counter++;
         Task newTask = new Task(title, counter, false);
         toDoDao.addTask(newTask);
@@ -31,9 +31,6 @@ public class PerformUpdateImpl implements PerformUpdate {
     }
 
     public void updateTask(int id, String title) {
-        Task toUpdate = toDoDao.getSingleTask(id);
-        toUpdate.getTitle().replaceAll(title);
-        toDoDao.addTask(toUpdate);
         toDoDao.updateTask(id, title);
     }
 
@@ -57,7 +54,7 @@ public class PerformUpdateImpl implements PerformUpdate {
         toDoDao.showIncompleteTasks();
     }
 
-    public void addDescription(int id String description) {
+    public void addDescription(int id, String description) {
         toDoDao.addDescription(id, description);
     }
 
@@ -82,8 +79,7 @@ public class PerformUpdateImpl implements PerformUpdate {
     }
 
     public Task getSingleTask(int id){
-
-        toDoDao.getSingleTask(id);
+        return toDoDao.getSingleTask(id);
     }
 
 }

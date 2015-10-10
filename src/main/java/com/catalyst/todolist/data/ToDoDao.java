@@ -22,11 +22,12 @@ public interface ToDoDao {
     void markTaskIncomplete(int id);
     ArrayList<Task> showCompleteTasks();
     ArrayList<Task> showIncompleteTasks();
-    void addDescription(int id);
+    void addDescription(int id, String description);
     void assignTask(int id);
     void markTaskInProgress(int id);
     ArrayList<Task> showTasksInProgress();
     void assignDueDate(int id);
     ArrayList<Task> showPastDue();
+    Task getSingleTask(int id);
 
 }

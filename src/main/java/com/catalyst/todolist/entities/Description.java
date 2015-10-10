@@ -4,20 +4,20 @@ package com.catalyst.todolist.entities;
  * Created by ddelaney on 10/8/2015.
  */
 public class Description {
-    String discription;
+    String description;
 
     public Description() {
     }
 
     public Description(String discription) {
-        this.discription = discription;
+        this.description = description;
     }
 
-    public String getDiscription() {
-        return discription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDiscription(String discription) {
-        this.discription = discription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -23,6 +23,7 @@ public class ToDoListData implements ToDoDao {
 
     @Override
     public void addTask(Task task) {
+
         list.add(task);
     }
 
@@ -39,7 +40,8 @@ public class ToDoListData implements ToDoDao {
     }
 
     @Override
-    public void markTaskComplete(int id) {
+    public void markTaskComplete(int id)
+    {
         list.get(id).setComplete(true);
     }
 
@@ -61,12 +63,17 @@ public class ToDoListData implements ToDoDao {
 
     @Override
     public ArrayList<Task> showIncompleteTasks() {
-
-        return list;
+        ArrayList<Task> incompletedList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (!list.get(i).isComplete()){
+                incompletedList.add(list.get(i));
+            }
+        }
+        return incompletedList;
     }
 
     @Override
-    public void addDescription(int id) {
+    public void addDescription(int id, String description) {
 
     }
 
@@ -95,5 +102,15 @@ public class ToDoListData implements ToDoDao {
     public ArrayList<Task> showPastDue() {
 
         return list;
+    }
+
+    @Override
+    public Task getSingleTask(int id){
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getId() == id){
+                return list.get(i);
+            }
+        }
+        return list.get(id);
     }
 }
