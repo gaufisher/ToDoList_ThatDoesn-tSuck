@@ -14,7 +14,8 @@ public class Menu {
     Scanner scanner = new Scanner(System.in);
     private PerformUpdate performUpdate;
 
-    public Menu() {
+    public void setPerformUpdate(PerformUpdate performUpdate){
+        this.performUpdate = performUpdate;
     }
 
     public void start() {

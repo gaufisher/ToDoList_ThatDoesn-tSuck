@@ -11,7 +11,11 @@ import com.catalyst.todolist.application.PerformUpdateImpl;
  */
 public class AppRunner {
     public static void main (String[] args){
+        ToDoDao toDoDao = new ToDoListData();
+        PerformUpdate performUpdate = new PerformUpdateImpl();
+        performUpdate.setToDoDao(toDoDao);
         Menu menu = new Menu();
+        menu.setPerformUpdate(performUpdate);
         menu.start();
     }
 }

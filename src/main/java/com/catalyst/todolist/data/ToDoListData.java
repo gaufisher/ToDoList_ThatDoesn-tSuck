@@ -1,5 +1,6 @@
 package com.catalyst.todolist.data;
 
+import com.catalyst.todolist.entities.Description;
 import com.catalyst.todolist.entities.Task;
 
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * Created by ddelaney on 10/8/2015.
  */
 public class ToDoListData implements ToDoDao {
-    private ArrayList<Task> list;
+    private ArrayList<Task> list = new ArrayList<>();
 
 
     /**
@@ -74,7 +75,7 @@ public class ToDoListData implements ToDoDao {
 
     @Override
     public void addDescription(int id, String description) {
-
+        list.get(id).setDescription(new Description(description));
     }
 
     @Override
