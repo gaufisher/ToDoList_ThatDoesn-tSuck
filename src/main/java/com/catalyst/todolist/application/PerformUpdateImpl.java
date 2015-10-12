@@ -54,7 +54,7 @@ public class PerformUpdateImpl implements PerformUpdate {
         return toDoDao.showIncompleteTasks();
     }
 
-    public void addDescription(int id, String description) {
+    public void addDescription(int id, Description description) {
         toDoDao.addDescription(id, description);
     }
 

@@ -7,10 +7,11 @@ public class Description {
     String description;
 
     public Description() {
+        description = "No Description";
     }
 
-    public Description(String discription) {
-        this.description = description;
+    public Description(String description) {
+        this.description = this.description;
     }
 
     public String getDescription() {
@@ -19,5 +20,10 @@ public class Description {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return this.description;
     }
 }

@@ -3,6 +3,7 @@ package com.catalyst.todolist.presentation;
 import com.catalyst.todolist.application.PerformUpdate;
 import com.catalyst.todolist.application.PerformUpdateImpl;
 import com.catalyst.todolist.data.ToDoListData;
+import com.catalyst.todolist.entities.Description;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -127,12 +128,13 @@ public class Menu {
             else
                 break;
         } while (true);
-        System.out.println("The title of the book will be "+ input);
+        System.out.println("The title is: "+ input);
         return input;
     }
 
-    private String getNewDescription() {
+    private Description getNewDescription() {
         String input;
+        Description description = new Description();
         do{
             System.out.println("Enter a description:");
             input = scanner.nextLine();
@@ -142,7 +144,8 @@ public class Menu {
                 break;
         }while (true);
         System.out.println("The description is: "+ input);
-        return input;
+        description.setDescription(input);
+        return description;
     }
 
 }

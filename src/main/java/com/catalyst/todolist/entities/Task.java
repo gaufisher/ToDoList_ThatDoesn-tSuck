@@ -13,7 +13,7 @@ public class Task {
         this.title = "";
         this.id = 0;
         this.complete = false;
-        this.description = null;
+        this.description = new Description();
     }
 
 
@@ -58,6 +58,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.id + ", " + this.title + ", " + this.complete;
+        return this.id + ", " + this.title + ", " + this.complete + ", " + this.description;
     }
 }

@@ -1,6 +1,7 @@
 package com.catalyst.todolist.application;
 
 import com.catalyst.todolist.data.ToDoDao;
+import com.catalyst.todolist.entities.Description;
 import com.catalyst.todolist.entities.Task;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public interface PerformUpdate {
     void markTaskIncomplete(int id);
     ArrayList<Task> showCompleteTasks();
     ArrayList<Task> showIncompleteTasks();
-    void addDescription(int id, String description);
+    void addDescription(int id, Description description);
     void assignTask(int id);
     void markTaskInProgress(int id);
     ArrayList<Task> showTasksInProgress();
