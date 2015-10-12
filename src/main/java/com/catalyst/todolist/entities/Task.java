@@ -1,26 +1,38 @@
 package com.catalyst.todolist.entities;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 /**
  * Created by ddelaney on 10/8/2015.
+ * Ask Derek if you have any questions about the Task object.
  */
 public class Task {
     private String title;
     private int id;
-    private boolean complete;
+    private Status status;
+    private LocalDate dueDate;
+    private User user;
     private Description description;
 
     public Task() {
         this.title = "";
         this.id = 0;
-        this.complete = false;
-        this.description = null;
+        this.status = Status.INCOMPLETE;
+        this.dueDate = null;
+        this.user = new User();
+        this.description = new Description();
     }
 
 
-    public Task(String title, int id, boolean isComplete) {
+    public Task(String title, int id, Status status,LocalDate date, User user) {
         this.title = title;
         this.id = id;
-        this.complete = isComplete;
+        this.status = status;
+        this.dueDate = date;
+        this.user = user;
         this.description = new Description();
     }
 
@@ -40,12 +52,28 @@ public class Task {
         this.id = id;
     }
 
-    public boolean isComplete() {
-        return complete;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setComplete(boolean complete) {
-        this.complete = complete;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Description getDescription() {
@@ -58,6 +86,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.id + ", " + this.title + ", " + this.complete;
+        return id + ", " + title + ", " + status + ", " + dueDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ", " + user.getUserName() + ", " + description;
     }
 }

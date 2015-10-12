@@ -3,12 +3,21 @@ package com.catalyst.todolist.presentation;
 import com.catalyst.todolist.application.PerformUpdate;
 import com.catalyst.todolist.application.PerformUpdateImpl;
 import com.catalyst.todolist.data.ToDoListData;
+import com.catalyst.todolist.entities.Description;
+import com.catalyst.todolist.entities.Task;
+import com.catalyst.todolist.entities.User;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
  * Created by cat on 10/8/2015.
+ * Menu object runs the rest of the todo list
  */
 public class Menu {
     Scanner scanner = new Scanner(System.in);
@@ -18,16 +27,23 @@ public class Menu {
         this.performUpdate = performUpdate;
     }
 
+    /**
+     * This method controls the flow and grabs user input.
+     */
     public void start() {
+        boolean canHazMenu = false;
         do {
-            mainMenu();
+            if (canHazMenu)
+                lolMenu();
+            else
+                mainMenu();
             String input = scanner.nextLine();
             switch (input) {
                 case "1":
-                    performUpdate.addTask(getNewTitle());
+                    performUpdate.addTask(getNewTitle(), getNewDueDate(), getNewUser());
                     break;
                 case "2":
-                    displayAllTasks();
+                    displayTasks(performUpdate.getTasks());
                     break;
                 case "3":
                     performUpdate.updateTask(getTaskNumber(), getNewTitle());
@@ -39,82 +55,142 @@ public class Menu {
                     performUpdate.markTaskComplete(getTaskNumber());
                     break;
                 case "6":
-                    performUpdate.markTaskIncomplete(getTaskNumber());
+                    displayTasks(performUpdate.showCompleteTasks());
                     break;
                 case "7":
-                    performUpdate.showCompleteTasks();
+                    performUpdate.markTaskIncomplete(getTaskNumber());
                     break;
                 case "8":
-                    performUpdate.showIncompleteTasks();
+                    displayTasks(performUpdate.showIncompleteTasks());
                     break;
                 case "9":
-                    performUpdate.addDescription(getTaskNumber(), getNewDescription());
-                    break;
-                case "10":
-                    performUpdate.assignTask(getTaskNumber());
-                    break;
-                case "11":
                     performUpdate.markTaskInProgress(getTaskNumber());
                     break;
+                case "10":
+                    displayTasks(performUpdate.showTasksInProgress());
+                    break;
+                case "11":
+                    performUpdate.addDescription(getTaskNumber(), getNewDescription());
+                    break;
                 case "12":
-                    performUpdate.showTasksInProgress();
+                    performUpdate.assignTask(getTaskNumber(), getNewUser());
                     break;
                 case "13":
-                    performUpdate.assignDueDate(getTaskNumber());
+                    performUpdate.assignDueDate(getTaskNumber(), getNewDueDate());
                     break;
                 case "14":
-                    performUpdate.showPastDue();
+                    displayTasks(performUpdate.showPastDue());
+                    break;
                 case "15":
+                    scanner.close();
                     return;
+                case "lol":
+                    canHazMenu = true;
+                    break;
+                case "kthxbai":
+                    canHazMenu = false;
+                    break;
                 default:
+                    System.out.println("orly");
                     break;
             }
-
+            System.out.println("Press enter to continue.");
+            scanner.nextLine();
         } while (true);
     }
 
+    /**
+     * "Prints out a menu to the console because consoles are the greatest thing ever created, just ask anyone."
+     * --No one EVER
+     */
     private void mainMenu() {
         System.out.println("To Do List");
         System.out.println("===================");
         System.out.println("1. Add task");
-        System.out.println("2. Display task");
+        System.out.println("2. Display tasks");
         System.out.println("3. Update task");
         System.out.println("4. Remove task");
         System.out.println("5. Mark task as complete");
-        System.out.println("6. Mark task as incomplete");
-        System.out.println("7. Show completed tasks");
+        System.out.println("6. Show completed tasks");
+        System.out.println("7. Mark task as incomplete");
         System.out.println("8. Show incomplete tasks");
-        System.out.println("9. Add description to task");
-        System.out.println("10. Assign task");
-        System.out.println("11. Mark task in progress");
-        System.out.println("12. Show tasks in progress");
+        System.out.println("9. Mark task in progress");
+        System.out.println("10. Show tasks in progress");
+        System.out.println("11. Add description to task");
+        System.out.println("12. Assign task");
         System.out.println("13. Assign due date");
         System.out.println("14. Show past due");
         System.out.println("15. Exit");
     }
 
-    private void displayAllTasks(){
-        ArrayList taskList = performUpdate.getTasks();
+    /**
+     * lol
+     */
+    private void lolMenu(){
+        System.out.println("2 Do List");
+        System.out.println("===================");
+        System.out.println("1. ADD TASK");
+        System.out.println("2. DISPLAY TASKZ");
+        System.out.println("3. UPDATE TASK");
+        System.out.println("4. REMOOV TASK");
+        System.out.println("5. MARK TASK AS COMPLETE");
+        System.out.println("6. SHOW COMPLETD TASKZ");
+        System.out.println("7. MARK TASK AS INCOMPLETE");
+        System.out.println("8. SHOW INCOMPLETE TASKZ");
+        System.out.println("9. MARK TASK IN PROGRES");
+        System.out.println("10. SHOW TASKZ IN PROGRES");
+        System.out.println("11. ADD DESCRIPSHUN 2 TASK");
+        System.out.println("12. ASSIGN TASK");
+        System.out.println("13. ASSIGN DUE DATE");
+        System.out.println("14. SHOW PAST DUE");
+        System.out.println("15. EXIT");
+    }
+
+    private void displayTasks(ArrayList taskList){
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i + ". " + taskList.get(i));
+            System.out.println(taskList.get(i));
         }
     }
 
     private int getTaskNumber() {
         int input = 0;
-        boolean isTrue;
+        String text = "";
+        boolean foundIt = false;
         do {
-            System.out.println("Enter an id number:");
+            System.out.println("Enter an id number or title:");
+            text = scanner.nextLine();
+            //check for number
             try {
-                input = Integer.parseInt(scanner.nextLine());
-                isTrue = true;
+                input = Integer.parseInt(text);
+                if (performUpdate.validateId(input)) {
+                    foundIt = true;
+                }
+                else {
+                    foundIt = false;
+                }
             } catch (NumberFormatException e) {
-                System.out.println("Not a valid input");
-                isTrue = false;
+                input = searchForTitle(text);
+                if (input > 0) {
+                    foundIt = true;
+                }
+                else {
+                    System.out.println("Not a valid input");
+                }
             }
-        } while (!isTrue);
+        }
+        while (!foundIt);
 
         return input;
+    }
+
+    private int searchForTitle(String text){
+        int id = 0;
+        ArrayList<Task> list = performUpdate.getTasks();
+        for (Task aTask : list){
+            if (aTask.getTitle().equalsIgnoreCase(text))
+                id = aTask.getId();
+        }
+        return id;
     }
 
     private String getNewTitle() {
@@ -122,27 +198,62 @@ public class Menu {
         do {
             System.out.println("Enter a new title:");
             input = scanner.nextLine();
-            if (input.equals("") || input == null)
+            if (performUpdate.validateTitle(input) || input.equals(""))
                 System.out.println("Not a valid input");
             else
                 break;
         } while (true);
-        System.out.println("The title of the book will be "+ input);
+        System.out.println("The title is: "+ input);
         return input;
     }
 
-    private String getNewDescription() {
+    private Description getNewDescription() {
         String input;
+        Description description = new Description();
         do{
             System.out.println("Enter a description:");
             input = scanner.nextLine();
-            if(input.equals("") || input == null)
+            if(input.equals(""))
                 System.out.println("Not a valid input");
             else
                 break;
         }while (true);
         System.out.println("The description is: "+ input);
-        return input;
+        description.setDescription(input);
+        return description;
+    }
+
+    private User getNewUser(){
+        User user = new User();
+        String input;
+        do{
+            System.out.println("Enter a username:");
+            input = scanner.nextLine();
+            if(input.equals(""))
+                System.out.println("Not a valid input");
+            else
+                break;
+        }while (true);
+        user.setUserName(input);
+        return user;
+    }
+
+    private LocalDate getNewDueDate() {
+        DateTimeFormatter dateFormatter =  DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate date;
+        String input;
+        do{
+            try {
+                System.out.println("Enter a date (MM/DD/YYYY):");
+                input = scanner.nextLine();
+                date = LocalDate.parse(input, dateFormatter);
+                break;
+            }
+           catch(DateTimeParseException e) {
+               System.out.println("Not a valid input");
+           }
+        }while (true);
+        return date;
     }
 
 }

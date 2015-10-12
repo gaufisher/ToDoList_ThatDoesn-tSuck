@@ -4,12 +4,20 @@ package com.catalyst.todolist.entities;
  * Created by ddelaney on 10/8/2015.
  */
 public class Description {
-    String description;
+    private String description;
 
+    /**
+     *Description has a default of "no description"
+     */
     public Description() {
+        description = "No Description";
     }
 
-    public Description(String discription) {
+    /**
+     * Creates a new description object
+     * @param description user input
+     */
+    public Description(String description) {
         this.description = description;
     }
 
@@ -17,7 +25,16 @@ public class Description {
         return description;
     }
 
+    /**
+     * Changes teh description to the user-defined description
+     * @param description user input
+     */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return this.description;
     }
 }

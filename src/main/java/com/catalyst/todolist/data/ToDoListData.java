@@ -1,171 +1,163 @@
 package com.catalyst.todolist.data;
 
 import com.catalyst.todolist.entities.Description;
+import com.catalyst.todolist.entities.Status;
 import com.catalyst.todolist.entities.Task;
+import com.catalyst.todolist.entities.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ddelaney on 10/8/2015.
  */
 public class ToDoListData implements ToDoDao {
+    private static ToDoListData instance = null;
+    private ToDoListData(){}
+    public static ToDoListData getInstance(){
+        if(instance == null){
+            instance = new ToDoListData();
+        }
+        return instance;
+    }
     private ArrayList<Task> list = new ArrayList<>();
 
-
-    /**
-     * Use this to retrieve a list of all tasks.
-     *
-     * @return a List<Task> object containing all tasks.
-     */
     @Override
     public ArrayList<Task> getTasks() {
         return list;
     }
 
-
-    /**
-     * Use this to add a new task to the To Do List.
-     * @return void
-     */
     @Override
     public void addTask(Task task) {
-
         list.add(task);
     }
 
-
-    /**
-     * Use this to change the name of an existing task
-     * @return void
-     */
     @Override
     public void updateTask(int id, String title) {
-        for(int i=0; i < list.size(); i++) {
-            if (list.get(i).getId() == id) {
-                list.get(i).setTitle(title);
+        for (Task aList : list) {
+            if (aList.getId() == id) {
+                aList.setTitle(title);
             }
         }
     }
 
-
-    /**
-     * Use this to remove an existing task from the To Do List
-     * @return void
-     */
     @Override
     public void removeTask(int id) {
                 list.remove(getSingleTask(id));
     }
 
-    /**
-     * Use this to mark a task as complete
-     * @return void
-     */
     @Override
-    public void markTaskComplete(int id)
-    {
-        getSingleTask(id).setComplete(true);
+    public void markTaskComplete(int id) {
+        getSingleTask(id).setStatus(Status.COMPLETE);
     }
 
-    /**
-     * Use this to mark a task as incomplete
-     * @return void
-     */
     @Override
     public void markTaskIncomplete(int id) {
-        getSingleTask(id).setComplete(false);
+        getSingleTask(id).setStatus(Status.INCOMPLETE);
     }
 
-
-    /**
-     * Use this to show a list of only tasks that are completed
-     * I should probably be returning the completedList ArrayList to my presentation layer so it can present the list
-     * @return void because displayTasks() prints to the console.
-     */
     @Override
-    public void showCompleteTasks() {
+    public ArrayList<Task> showCompleteTasks() {
         ArrayList<Task> completedList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).isComplete()){
-                completedList.add(list.get(i));
+        for (Task aList : list) {
+            if (aList.getStatus() == Status.COMPLETE) {
+                completedList.add(aList);
             }
         }
-        displayTasks(completedList);
+        return completedList;
     }
 
-    /**
-     * Use this to show a list of only tasks that are incomplete
-     * Same story as showCompleteTasks()...I may have to move the output to the presentation layer.
-     * @return void because reasons.
-     */
     @Override
-    public void showIncompleteTasks() {
-        ArrayList<Task> incompletedList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (!list.get(i).isComplete()){
-                incompletedList.add(list.get(i));
+    public ArrayList<Task> showIncompleteTasks() {
+        ArrayList<Task> incompleteList = new ArrayList<>();
+        for (Task aList : list) {
+            if (aList.getStatus() == Status.INCOMPLETE) {
+                incompleteList.add(aList);
             }
         }
-        displayTasks(incompletedList);
-    }
-
-    /**
-     * Use this to add or update a description of a Task
-     * @return void
-     */
-    @Override
-    public void addDescription(int id, String description) {
-        list.get(id).setDescription(new Description(description));
+        return incompleteList;
     }
 
     @Override
-    public void assignTask(int id) {
+    public void addDescription(int id, Description description) {
+        getSingleTask(id).setDescription(description);
+    }
 
+
+    @Override
+    public void assignTask(int id, User user) {
+        getSingleTask(id).setUser(user);
     }
 
     @Override
     public void markTaskInProgress(int id) {
-
+        getSingleTask(id).setStatus(Status.INPROGRESS);
     }
 
     @Override
-    public void showTasksInProgress() {
-
+    public ArrayList<Task> showTasksInProgress() {
+        ArrayList<Task> inProgressList = new ArrayList<>();
+        for (Task aList : list) {
+            if (aList.getStatus() == Status.INPROGRESS) {
+                inProgressList.add(aList);
+            }
+        }
+        return inProgressList;
     }
 
     @Override
-    public void assignDueDate(int id) {
-
+    public void assignDueDate(int id, LocalDate newDueDate) {
+        getSingleTask(id).setDueDate(newDueDate);
     }
 
     @Override
     public ArrayList<Task> showPastDue() {
-
-        return list;
-    }
-
-    /**
-     * Use this when you need to select a single Task object from the To Do List
-     * @return a Task object
-     */
-    @Override
-    public Task getSingleTask(int id){
-        for(int i = 0; i < list.size(); i++){
-            if(list.get(i).getId() == id){
-                return list.get(i);
+        ArrayList<Task> pastDue = new ArrayList<>();
+        for (Task aList : list) {
+            if (aList.getStatus() == Status.INCOMPLETE && aList.getDueDate().isBefore(LocalDate.now())) {
+                pastDue.add(aList);
             }
         }
-        return list.get(id);
+        return pastDue;
     }
+
+    @Override
+    public Task getSingleTask(int id){
+        for (Task aList : list) {
+            if (aList.getId() == id) {
+                return aList;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean validateId(int id){
+        boolean valid = false;
+        for (Task aList : list) {
+            if (id == aList.getId()) {
+                valid = true;
+            }
+        }
+        return valid;
+    }
+
 
     /**
-     * Use this for reasons unknown to mankind...possibly to print out a list from an array.
-     * @param list
+     * Check to make sure a title doesn't already exist.
+     *
+     * @param title the title the user is checking.
+     * @return a boolean on whether or not the title already exists.
      */
-    private void displayTasks(ArrayList<Task> list){
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
+    @Override
+    public boolean validateTitle(String title) {
+        boolean exist = false;
+        for (Task aList : list) {
+            if (title.equalsIgnoreCase(aList.getTitle())) {
+                exist = true;
+            }
         }
+        return exist;
     }
-
 }
