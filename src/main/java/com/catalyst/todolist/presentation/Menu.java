@@ -4,6 +4,7 @@ import com.catalyst.todolist.application.PerformUpdate;
 import com.catalyst.todolist.application.PerformUpdateImpl;
 import com.catalyst.todolist.data.ToDoListData;
 import com.catalyst.todolist.entities.Description;
+import com.catalyst.todolist.entities.Task;
 import com.catalyst.todolist.entities.User;
 
 import java.text.DateFormat;
@@ -75,6 +76,7 @@ public class Menu {
                     break;
                 case "14":
                     displayTasks(performUpdate.showPastDue());
+                    break;
                 case "15":
                     scanner.close();
                     return;
@@ -141,24 +143,43 @@ public class Menu {
 
     private int getTaskNumber() {
         int input = 0;
-        boolean isTrue;
+        String text = "";
+        boolean foundIt = false;
         do {
-            System.out.println("Enter an id number:");
+            System.out.println("Enter an id number or title:");
+            text = scanner.nextLine();
+            //check for number
             try {
-                input = Integer.parseInt(scanner.nextLine());
-                if(performUpdate.validateId(input)){
-                    isTrue = true;
+                input = Integer.parseInt(text);
+                if (performUpdate.validateId(input)) {
+                    foundIt = true;
                 }
-                else{isTrue = false;}
-
+                else {
+                    foundIt = false;
+                }
             } catch (NumberFormatException e) {
-                System.out.println("Not a valid input");
-                isTrue = false;
+                input = searchForTitle(text);
+                if (input > 0) {
+                    foundIt = true;
+                }
+                else {
+                    System.out.println("Not a valid input");
+                }
             }
         }
-        while (!isTrue);
+        while (!foundIt);
 
         return input;
+    }
+
+    private int searchForTitle(String text){
+        int id = 0;
+        ArrayList<Task> list = performUpdate.getTasks();
+        for (Task aTask : list){
+            if (aTask.getTitle().equalsIgnoreCase(text))
+                id = aTask.getId();
+        }
+        return id;
     }
 
     private String getNewTitle() {

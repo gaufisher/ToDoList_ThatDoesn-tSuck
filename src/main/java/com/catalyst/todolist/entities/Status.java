@@ -1,7 +1,7 @@
 package com.catalyst.todolist.entities;
 
 /**
- * Created by ddelaney on 10/12/2015.
+ * This class represents the three states of a task.
  */
 public enum Status{
     COMPLETE {

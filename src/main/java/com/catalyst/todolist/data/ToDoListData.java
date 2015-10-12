@@ -7,6 +7,7 @@ import com.catalyst.todolist.entities.User;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ddelaney on 10/8/2015.
@@ -19,14 +20,10 @@ public class ToDoListData implements ToDoDao {
         return list;
     }
 
-
-
     @Override
     public void addTask(Task task) {
-
         list.add(task);
     }
-
 
     @Override
     public void updateTask(int id, String title) {
@@ -36,7 +33,6 @@ public class ToDoListData implements ToDoDao {
             }
         }
     }
-
 
     @Override
     public void removeTask(int id) {
@@ -109,8 +105,13 @@ public class ToDoListData implements ToDoDao {
 
     @Override
     public ArrayList<Task> showPastDue() {
-
-        return list;
+        ArrayList<Task> pastDue = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getStatus() == Status.INCOMPLETE && list.get(i).getDueDate().isBefore(LocalDate.now())){
+                pastDue.add(list.get(i));
+            }
+        }
+        return pastDue;
     }
 
     @Override

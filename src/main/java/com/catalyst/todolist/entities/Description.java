@@ -11,7 +11,7 @@ public class Description {
     }
 
     public Description(String description) {
-        this.description = this.description;
+        this.description = description;
     }
 
     public String getDescription() {
