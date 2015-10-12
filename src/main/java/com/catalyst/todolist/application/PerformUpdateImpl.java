@@ -82,4 +82,8 @@ public class PerformUpdateImpl implements PerformUpdate {
         return toDoDao.getSingleTask(id);
     }
 
+    public boolean validateId(int id){
+        return toDoDao.validateId(id);
+    }
+
 }

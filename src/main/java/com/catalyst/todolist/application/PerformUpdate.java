@@ -26,4 +26,5 @@ public interface PerformUpdate {
     ArrayList<Task> showTasksInProgress();
     void assignDueDate(int id);
     ArrayList<Task> showPastDue();
+    boolean validateId(int id);
 }

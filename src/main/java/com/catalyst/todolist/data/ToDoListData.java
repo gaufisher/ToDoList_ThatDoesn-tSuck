@@ -159,5 +159,16 @@ public class ToDoListData implements ToDoDao {
         return null;
     }
 
+    @Override
+    public boolean validateId(int id){
+        boolean valid = false;
+        for (int i=0; i < list.size(); i++){
+            if(id == list.get(i).getId()){
+                valid = true;
+            }
+        }
+        return valid;
+    }
+
 
 }

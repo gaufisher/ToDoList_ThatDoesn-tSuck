@@ -30,5 +30,6 @@ public interface ToDoDao {
     void assignDueDate(int id);
     ArrayList<Task> showPastDue();
     Task getSingleTask(int id);
+    boolean validateId(int id);
 
 }

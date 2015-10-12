@@ -79,7 +79,7 @@ public class Menu {
         System.out.println("To Do List");
         System.out.println("===================");
         System.out.println("1. Add task");
-        System.out.println("2. Display task");
+        System.out.println("2. Display tasks");
         System.out.println("3. Update task");
         System.out.println("4. Remove task");
         System.out.println("5. Mark task as complete");
@@ -108,12 +108,17 @@ public class Menu {
             System.out.println("Enter an id number:");
             try {
                 input = Integer.parseInt(scanner.nextLine());
-                isTrue = true;
+                if(performUpdate.validateId(input)){
+                    isTrue = true;
+                }
+                else{isTrue = false;}
+
             } catch (NumberFormatException e) {
                 System.out.println("Not a valid input");
                 isTrue = false;
             }
-        } while (!isTrue);
+        }
+        while (!isTrue);
 
         return input;
     }
