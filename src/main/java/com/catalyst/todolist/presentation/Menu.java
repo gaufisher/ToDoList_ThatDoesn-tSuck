@@ -21,8 +21,12 @@ public class Menu {
     }
 
     public void start() {
+        boolean canHazMenu = false;
         do {
-            mainMenu();
+            if (canHazMenu)
+                lolMenu();
+            else
+                mainMenu();
             String input = scanner.nextLine();
             switch (input) {
                 case "1":
@@ -68,7 +72,14 @@ public class Menu {
                     displayTasks(performUpdate.showPastDue());
                 case "15":
                     return;
+                case "lol":
+                    canHazMenu = true;
+                    break;
+                case "kthxbai":
+                    canHazMenu = false;
+                    break;
                 default:
+                    System.out.println("orly");
                     break;
             }
             System.out.println("Press enter to continue.");
@@ -91,6 +102,26 @@ public class Menu {
         System.out.println("10. Show tasks in progress");
         System.out.println("11. Add description to task");
         System.out.println("12. Assign task");
+        System.out.println("13. Assign due date");
+        System.out.println("14. Show past due");
+        System.out.println("15. Exit");
+    }
+
+    private void lolMenu(){
+        System.out.println("CAn Do List");
+        System.out.println("===================");
+        System.out.println("1. i CAN Add task?");
+        System.out.println("2. i can HAZ tasks?");
+        System.out.println("3. Update task?");
+        System.out.println("4. Remove task?");
+        System.out.println("5. i can Mark task as complete");
+        System.out.println("6. i can Mark task as incomplete");
+        System.out.println("7. i can haz completed tasks");
+        System.out.println("8. i can haz incomplete tasks");
+        System.out.println("9. Add description to task");
+        System.out.println("10. Assign task");
+        System.out.println("11. Mark task in progress");
+        System.out.println("12. Show tasks in progress");
         System.out.println("13. Assign due date");
         System.out.println("14. Show past due");
         System.out.println("15. Exit");
