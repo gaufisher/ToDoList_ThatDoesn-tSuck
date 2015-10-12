@@ -87,6 +87,11 @@ public interface ToDoDao {
      */
     ArrayList<Task> showTasksInProgress();
 
+    /**
+     * Changes the due date of an existing task
+     * @param id from user input
+     * @param newDueDate from user input
+     */
     void assignDueDate(int id, LocalDate newDueDate);
 
     /**
