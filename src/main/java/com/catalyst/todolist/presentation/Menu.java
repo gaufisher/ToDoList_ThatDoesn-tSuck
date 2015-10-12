@@ -41,31 +41,31 @@ public class Menu {
                     performUpdate.markTaskComplete(getTaskNumber());
                     break;
                 case "6":
-                    performUpdate.markTaskIncomplete(getTaskNumber());
+                    displayTasks(performUpdate.showCompleteTasks());
                     break;
                 case "7":
-                    displayTasks(performUpdate.showCompleteTasks());
+                    performUpdate.markTaskIncomplete(getTaskNumber());
                     break;
                 case "8":
                     displayTasks(performUpdate.showIncompleteTasks());
                     break;
                 case "9":
-                    performUpdate.addDescription(getTaskNumber(), getNewDescription());
-                    break;
-                case "10":
-                    performUpdate.assignTask(getTaskNumber(), getNewUser());
-                    break;
-                case "11":
                     performUpdate.markTaskInProgress(getTaskNumber());
                     break;
+                case "10":
+                    displayTasks(performUpdate.showTasksInProgress());
+                    break;
+                case "11":
+                    performUpdate.addDescription(getTaskNumber(), getNewDescription());
+                    break;
                 case "12":
-                    performUpdate.showTasksInProgress();
+                    performUpdate.assignTask(getTaskNumber(), getNewUser());
                     break;
                 case "13":
                     performUpdate.assignDueDate(getTaskNumber());
                     break;
                 case "14":
-                    performUpdate.showPastDue();
+                    displayTasks(performUpdate.showPastDue());
                 case "15":
                     return;
                 default:
@@ -84,13 +84,13 @@ public class Menu {
         System.out.println("3. Update task");
         System.out.println("4. Remove task");
         System.out.println("5. Mark task as complete");
-        System.out.println("6. Mark task as incomplete");
-        System.out.println("7. Show completed tasks");
+        System.out.println("6. Show completed tasks");
+        System.out.println("7. Mark task as incomplete");
         System.out.println("8. Show incomplete tasks");
-        System.out.println("9. Add description to task");
-        System.out.println("10. Assign task");
-        System.out.println("11. Mark task in progress");
-        System.out.println("12. Show tasks in progress");
+        System.out.println("9. Mark task in progress");
+        System.out.println("10. Show tasks in progress");
+        System.out.println("11. Add description to task");
+        System.out.println("12. Assign task");
         System.out.println("13. Assign due date");
         System.out.println("14. Show past due");
         System.out.println("15. Exit");
