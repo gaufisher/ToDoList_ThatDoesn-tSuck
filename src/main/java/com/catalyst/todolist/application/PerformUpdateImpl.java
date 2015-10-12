@@ -25,6 +25,12 @@ public class PerformUpdateImpl implements PerformUpdate {
         return toDoDao.getTasks();
     }
 
+    /**
+     * Creates a new task object and asks the Dao to add it to the current list. The counter ensures each id is unique
+     * @param title title from user input
+     * @param newDueDate from user input
+     * @param newUser from user input
+     */
     public void addTask(String title, LocalDate newDueDate, User newUser) {
         counter++;
         Task newTask = new Task(title, counter, Status.INCOMPLETE, newDueDate, newUser);
