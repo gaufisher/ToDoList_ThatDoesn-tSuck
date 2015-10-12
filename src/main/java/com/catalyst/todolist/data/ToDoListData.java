@@ -83,14 +83,14 @@ public class ToDoListData implements ToDoDao {
      * @return void because displayTasks() prints to the console.
      */
     @Override
-    public void showCompleteTasks() {
+    public ArrayList<Task> showCompleteTasks() {
         ArrayList<Task> completedList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).isComplete()){
                 completedList.add(list.get(i));
             }
         }
-        displayTasks(completedList);
+        return completedList;
     }
 
     /**
@@ -99,14 +99,14 @@ public class ToDoListData implements ToDoDao {
      * @return void because reasons.
      */
     @Override
-    public void showIncompleteTasks() {
+    public ArrayList<Task> showIncompleteTasks() {
         ArrayList<Task> incompletedList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             if (!list.get(i).isComplete()){
                 incompletedList.add(list.get(i));
             }
         }
-        displayTasks(incompletedList);
+        return incompletedList;
     }
 
     /**
@@ -129,8 +129,9 @@ public class ToDoListData implements ToDoDao {
     }
 
     @Override
-    public void showTasksInProgress() {
+    public ArrayList<Task> showTasksInProgress() {
 
+        return list;
     }
 
     @Override
@@ -158,14 +159,5 @@ public class ToDoListData implements ToDoDao {
         return list.get(id);
     }
 
-    /**
-     * Use this for reasons unknown to mankind...possibly to print out a list from an array.
-     * @param list
-     */
-    private void displayTasks(ArrayList<Task> list){
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
-    }
 
 }

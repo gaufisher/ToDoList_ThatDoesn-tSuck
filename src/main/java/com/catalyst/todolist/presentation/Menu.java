@@ -27,7 +27,7 @@ public class Menu {
                     performUpdate.addTask(getNewTitle());
                     break;
                 case "2":
-                    displayAllTasks();
+                    displayTasks(performUpdate.getTasks());
                     break;
                 case "3":
                     performUpdate.updateTask(getTaskNumber(), getNewTitle());
@@ -42,10 +42,10 @@ public class Menu {
                     performUpdate.markTaskIncomplete(getTaskNumber());
                     break;
                 case "7":
-                    performUpdate.showCompleteTasks();
+                    displayTasks(performUpdate.showCompleteTasks());
                     break;
                 case "8":
-                    performUpdate.showIncompleteTasks();
+                    displayTasks(performUpdate.showIncompleteTasks());
                     break;
                 case "9":
                     performUpdate.addDescription(getTaskNumber(), getNewDescription());
@@ -69,7 +69,8 @@ public class Menu {
                 default:
                     break;
             }
-
+            System.out.println("Press enter to continue.");
+            scanner.nextLine();
         } while (true);
     }
 
@@ -93,10 +94,9 @@ public class Menu {
         System.out.println("15. Exit");
     }
 
-    private void displayAllTasks(){
-        ArrayList taskList = performUpdate.getTasks();
+    private void displayTasks(ArrayList taskList){
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i + ". " + taskList.get(i));
+            System.out.println(taskList.get(i));
         }
     }
 

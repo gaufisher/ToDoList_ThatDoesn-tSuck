@@ -46,12 +46,12 @@ public class PerformUpdateImpl implements PerformUpdate {
         toDoDao.markTaskIncomplete(id);
     }
 
-    public void showCompleteTasks() {
-        toDoDao.showCompleteTasks();
+    public ArrayList<Task> showCompleteTasks() {
+        return toDoDao.showCompleteTasks();
     }
 
-    public void showIncompleteTasks() {
-        toDoDao.showIncompleteTasks();
+    public ArrayList<Task> showIncompleteTasks() {
+        return toDoDao.showIncompleteTasks();
     }
 
     public void addDescription(int id, String description) {
@@ -66,16 +66,16 @@ public class PerformUpdateImpl implements PerformUpdate {
 
     }
 
-    public void showTasksInProgress() {
-
+    public ArrayList<Task> showTasksInProgress() {
+        return toDoDao.showTasksInProgress();
     }
 
     public void assignDueDate(int id) {
 
     }
 
-    public void showPastDue() {
-
+    public ArrayList<Task> showPastDue() {
+        return toDoDao.showPastDue();
     }
 
     public Task getSingleTask(int id){
