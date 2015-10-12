@@ -4,6 +4,7 @@ import com.catalyst.todolist.application.PerformUpdate;
 import com.catalyst.todolist.application.PerformUpdateImpl;
 import com.catalyst.todolist.data.ToDoListData;
 import com.catalyst.todolist.entities.Description;
+import com.catalyst.todolist.entities.User;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -52,7 +53,7 @@ public class Menu {
                     performUpdate.addDescription(getTaskNumber(), getNewDescription());
                     break;
                 case "10":
-                    performUpdate.assignTask(getTaskNumber());
+                    performUpdate.assignTask(getTaskNumber(), getNewUser());
                     break;
                 case "11":
                     performUpdate.markTaskInProgress(getTaskNumber());
@@ -151,6 +152,21 @@ public class Menu {
         System.out.println("The description is: "+ input);
         description.setDescription(input);
         return description;
+    }
+
+    private User getNewUser(){
+        User user = new User();
+        String input;
+        do{
+            System.out.println("Enter a username:");
+            input = scanner.nextLine();
+            if(input.equals("") || input == null)
+                System.out.println("Not a valid input");
+            else
+                break;
+        }while (true);
+        user.setUserName(input);
+        return user;
     }
 
 }

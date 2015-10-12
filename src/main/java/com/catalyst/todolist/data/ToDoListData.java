@@ -1,7 +1,9 @@
 package com.catalyst.todolist.data;
 
 import com.catalyst.todolist.entities.Description;
+import com.catalyst.todolist.entities.Status;
 import com.catalyst.todolist.entities.Task;
+import com.catalyst.todolist.entities.User;
 
 import java.util.ArrayList;
 
@@ -62,9 +64,8 @@ public class ToDoListData implements ToDoDao {
      * @return void
      */
     @Override
-    public void markTaskComplete(int id)
-    {
-        getSingleTask(id).setComplete(true);
+    public void markTaskComplete(int id) {
+        getSingleTask(id).setStatus(Status.COMPLETE);
     }
 
     /**
@@ -73,7 +74,7 @@ public class ToDoListData implements ToDoDao {
      */
     @Override
     public void markTaskIncomplete(int id) {
-        getSingleTask(id).setComplete(false);
+        getSingleTask(id).setStatus(Status.INCOMPLETE);
     }
 
 
@@ -86,7 +87,7 @@ public class ToDoListData implements ToDoDao {
     public ArrayList<Task> showCompleteTasks() {
         ArrayList<Task> completedList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).isComplete()){
+            if (list.get(i).getStatus() == Status.COMPLETE){
                 completedList.add(list.get(i));
             }
         }
@@ -102,7 +103,7 @@ public class ToDoListData implements ToDoDao {
     public ArrayList<Task> showIncompleteTasks() {
         ArrayList<Task> incompleteList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
-            if (!list.get(i).isComplete()){
+            if (list.get(i).getStatus() == Status.INCOMPLETE){
                 incompleteList.add(list.get(i));
             }
         }
@@ -119,19 +120,24 @@ public class ToDoListData implements ToDoDao {
     }
 
     @Override
-    public void assignTask(int id) {
-
+    public void assignTask(int id, User user) {
+        getSingleTask(id).setUser(user);
     }
 
     @Override
     public void markTaskInProgress(int id) {
-
+        getSingleTask(id).setStatus(Status.INPROGRESS);
     }
 
     @Override
     public ArrayList<Task> showTasksInProgress() {
-
-        return list;
+        ArrayList<Task> inProgressList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getStatus() == Status.INPROGRESS){
+                inProgressList.add(list.get(i));
+            }
+        }
+        return inProgressList;
     }
 
     @Override
