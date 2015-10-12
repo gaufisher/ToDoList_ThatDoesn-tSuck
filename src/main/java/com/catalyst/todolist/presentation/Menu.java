@@ -108,23 +108,23 @@ public class Menu {
     }
 
     private void lolMenu(){
-        System.out.println("CAn Do List");
+        System.out.println("2 Do List");
         System.out.println("===================");
-        System.out.println("1. i CAN Add task?");
-        System.out.println("2. i can HAZ tasks?");
-        System.out.println("3. Update task?");
-        System.out.println("4. Remove task?");
-        System.out.println("5. i can Mark task as complete");
-        System.out.println("6. i can Mark task as incomplete");
-        System.out.println("7. i can haz completed tasks");
-        System.out.println("8. i can haz incomplete tasks");
-        System.out.println("9. Add description to task");
-        System.out.println("10. Assign task");
-        System.out.println("11. Mark task in progress");
-        System.out.println("12. Show tasks in progress");
-        System.out.println("13. Assign due date");
-        System.out.println("14. Show past due");
-        System.out.println("15. Exit");
+        System.out.println("1. ADD TASK");
+        System.out.println("2. DISPLAY TASKZ");
+        System.out.println("3. UPDATE TASK");
+        System.out.println("4. REMOOV TASK");
+        System.out.println("5. MARK TASK AS COMPLETE");
+        System.out.println("6. SHOW COMPLETD TASKZ");
+        System.out.println("7. MARK TASK AS INCOMPLETE");
+        System.out.println("8. SHOW INCOMPLETE TASKZ");
+        System.out.println("9. MARK TASK IN PROGRES");
+        System.out.println("10. SHOW TASKZ IN PROGRES");
+        System.out.println("11. ADD DESCRIPSHUN 2 TASK");
+        System.out.println("12. ASSIGN TASK");
+        System.out.println("13. ASSIGN DUE DATE");
+        System.out.println("14. SHOW PAST DUE");
+        System.out.println("15. EXIT");
     }
 
     private void displayTasks(ArrayList taskList){
