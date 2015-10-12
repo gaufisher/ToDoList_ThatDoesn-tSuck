@@ -19,14 +19,11 @@ public class ToDoListData implements ToDoDao {
         return list;
     }
 
-
-
     @Override
     public void addTask(Task task) {
 
         list.add(task);
     }
-
 
     @Override
     public void updateTask(int id, String title) {
@@ -36,7 +33,6 @@ public class ToDoListData implements ToDoDao {
             }
         }
     }
-
 
     @Override
     public void removeTask(int id) {
@@ -133,6 +129,5 @@ public class ToDoListData implements ToDoDao {
         }
         return valid;
     }
-
 
 }

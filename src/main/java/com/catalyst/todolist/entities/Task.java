@@ -7,6 +7,7 @@ import java.time.format.FormatStyle;
 
 /**
  * Created by ddelaney on 10/8/2015.
+ * Ask Derek if you have any questions about the Task object.
  */
 public class Task {
     private String title;

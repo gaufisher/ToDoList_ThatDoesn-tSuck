@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 /**
  * Created by cat on 10/8/2015.
+ * Menu object runs the rest of the todo list
  */
 public class Menu {
     Scanner scanner = new Scanner(System.in);
@@ -25,6 +26,9 @@ public class Menu {
         this.performUpdate = performUpdate;
     }
 
+    /**
+     * This method controls the flow and grabs user input.
+     */
     public void start() {
         boolean canHazMenu = false;
         do {
@@ -93,6 +97,10 @@ public class Menu {
         } while (true);
     }
 
+    /**
+     * "Prints out a menu to the console because consoles are the greatest thing ever created, just ask anyone."
+     * --No one EVER
+     */
     private void mainMenu() {
         System.out.println("To Do List");
         System.out.println("===================");
@@ -113,6 +121,9 @@ public class Menu {
         System.out.println("15. Exit");
     }
 
+    /**
+     * lol
+     */
     private void lolMenu(){
         System.out.println("2 Do List");
         System.out.println("===================");

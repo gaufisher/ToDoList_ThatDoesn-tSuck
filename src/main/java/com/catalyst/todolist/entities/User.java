@@ -2,6 +2,7 @@ package com.catalyst.todolist.entities;
 
 /**
  * Created by ddelaney on 10/12/2015.
+ * A user is an object that has 5 parameters. Look at the constructors to figure them out. I'm done with java docs.
  */
 public class User {
     private String firstName;

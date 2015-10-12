@@ -8,6 +8,7 @@ import com.catalyst.todolist.application.PerformUpdateImpl;
 
 /**
  * Created by Gregory on 10/10/2015.
+ * Please run the to do list here
  */
 public class AppRunner {
     public static void main (String[] args){

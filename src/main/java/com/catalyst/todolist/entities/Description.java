@@ -6,18 +6,29 @@ package com.catalyst.todolist.entities;
 public class Description {
     private String description;
 
+    /**
+     *Description has a default of "no description"
+     */
     public Description() {
         description = "No Description";
     }
 
+    /**
+     * Creates a new description object
+     * @param description user input
+     */
     public Description(String description) {
-        this.description = this.description;
+        this.description = description;
     }
 
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Changes teh description to the user-defined description
+     * @param description user input
+     */
     public void setDescription(String description) {
         this.description = description;
     }
