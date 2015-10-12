@@ -2,6 +2,7 @@ package com.catalyst.todolist.data;
 
 import com.catalyst.todolist.entities.Description;
 import com.catalyst.todolist.entities.Task;
+import com.catalyst.todolist.entities.User;
 
 import java.util.ArrayList;
 
@@ -24,7 +25,7 @@ public interface ToDoDao {
     ArrayList<Task> showCompleteTasks();
     ArrayList<Task> showIncompleteTasks();
     void addDescription(int id, Description description);
-    void assignTask(int id);
+    void assignTask(int id, User user);
     void markTaskInProgress(int id);
     ArrayList<Task> showTasksInProgress();
     void assignDueDate(int id);

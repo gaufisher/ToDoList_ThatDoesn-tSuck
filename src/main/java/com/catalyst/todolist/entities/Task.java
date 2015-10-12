@@ -1,26 +1,34 @@
 package com.catalyst.todolist.entities;
 
+import java.time.LocalDate;
+
 /**
  * Created by ddelaney on 10/8/2015.
  */
 public class Task {
     private String title;
     private int id;
-    private boolean complete;
+    private Status status;
+    private LocalDate dueDate;
+    private User user;
     private Description description;
 
     public Task() {
         this.title = "";
         this.id = 0;
-        this.complete = false;
+        this.status = Status.INCOMPLETE;
+        this.dueDate = null;
+        this.user = new User();
         this.description = new Description();
     }
 
 
-    public Task(String title, int id, boolean isComplete) {
+    public Task(String title, int id, Status status) {
         this.title = title;
         this.id = id;
-        this.complete = isComplete;
+        this.status = Status.INCOMPLETE;
+        this.dueDate = null;
+        this.user = new User();
         this.description = new Description();
     }
 
@@ -40,12 +48,28 @@ public class Task {
         this.id = id;
     }
 
-    public boolean isComplete() {
-        return complete;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setComplete(boolean complete) {
-        this.complete = complete;
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Description getDescription() {
@@ -58,6 +82,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.id + ", " + this.title + ", " + this.complete + ", " + this.description;
+        return title + ", " + id + ", " + status + ", " + dueDate + ", " + user.getUserName() + ", " + description;
     }
 }
