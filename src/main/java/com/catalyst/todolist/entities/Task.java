@@ -82,6 +82,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return title + ", " + id + ", " + status + ", " + dueDate + ", " + user.getUserName() + ", " + description;
+        return id + ", " + title + ", " + status + ", " + dueDate + ", " + user.getUserName() + ", " + description;
     }
 }

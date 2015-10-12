@@ -64,7 +64,7 @@ public class PerformUpdateImpl implements PerformUpdate {
     }
 
     public void markTaskInProgress(int id) {
-
+        toDoDao.markTaskInProgress(id);
     }
 
     public ArrayList<Task> showTasksInProgress() {
