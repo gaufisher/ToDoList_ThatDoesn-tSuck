@@ -13,22 +13,13 @@ import java.util.ArrayList;
 public class ToDoListData implements ToDoDao {
     private ArrayList<Task> list = new ArrayList<>();
 
-
-    /**
-     * Use this to retrieve a list of all tasks.
-     *
-     * @return a List<Task> object containing all tasks.
-     */
     @Override
     public ArrayList<Task> getTasks() {
         return list;
     }
 
 
-    /**
-     * Use this to add a new task to the To Do List.
-     * @return void
-     */
+
     @Override
     public void addTask(Task task) {
 
@@ -36,10 +27,6 @@ public class ToDoListData implements ToDoDao {
     }
 
 
-    /**
-     * Use this to change the name of an existing task
-     * @return void
-     */
     @Override
     public void updateTask(int id, String title) {
         for(int i=0; i < list.size(); i++) {
@@ -50,39 +37,21 @@ public class ToDoListData implements ToDoDao {
     }
 
 
-    /**
-     * Use this to remove an existing task from the To Do List
-     * @return void
-     */
     @Override
     public void removeTask(int id) {
                 list.remove(getSingleTask(id));
     }
 
-    /**
-     * Use this to mark a task as complete
-     * @return void
-     */
     @Override
     public void markTaskComplete(int id) {
         getSingleTask(id).setStatus(Status.COMPLETE);
     }
 
-    /**
-     * Use this to mark a task as incomplete
-     * @return void
-     */
     @Override
     public void markTaskIncomplete(int id) {
         getSingleTask(id).setStatus(Status.INCOMPLETE);
     }
 
-
-    /**
-     * Use this to show a list of only tasks that are completed
-     * I should probably be returning the completedList ArrayList to my presentation layer so it can present the list
-     * @return void because displayTasks() prints to the console.
-     */
     @Override
     public ArrayList<Task> showCompleteTasks() {
         ArrayList<Task> completedList = new ArrayList<>();
@@ -94,11 +63,6 @@ public class ToDoListData implements ToDoDao {
         return completedList;
     }
 
-    /**
-     * Use this to show a list of only tasks that are incomplete
-     * Same story as showCompleteTasks()...I may have to move the output to the presentation layer.
-     * @return void because reasons.
-     */
     @Override
     public ArrayList<Task> showIncompleteTasks() {
         ArrayList<Task> incompleteList = new ArrayList<>();
@@ -110,14 +74,11 @@ public class ToDoListData implements ToDoDao {
         return incompleteList;
     }
 
-    /**
-     * Use this to add or update a description of a Task
-     * @return void
-     */
     @Override
     public void addDescription(int id, Description description) {
         getSingleTask(id).setDescription(description);
     }
+
 
     @Override
     public void assignTask(int id, User user) {
@@ -151,10 +112,6 @@ public class ToDoListData implements ToDoDao {
         return list;
     }
 
-    /**
-     * Use this when you need to select a single Task object from the To Do List
-     * @return a Task object
-     */
     @Override
     public Task getSingleTask(int id){
         for (Task aList : list) {
