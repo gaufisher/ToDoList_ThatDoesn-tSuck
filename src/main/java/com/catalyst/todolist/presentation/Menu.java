@@ -187,7 +187,7 @@ public class Menu {
         do {
             System.out.println("Enter a new title:");
             input = scanner.nextLine();
-            if (input.equals("") || input == null)
+            if (performUpdate.validateTitle(input) || input.equals(""))
                 System.out.println("Not a valid input");
             else
                 break;
@@ -202,7 +202,7 @@ public class Menu {
         do{
             System.out.println("Enter a description:");
             input = scanner.nextLine();
-            if(input.equals("") || input == null)
+            if(input.equals(""))
                 System.out.println("Not a valid input");
             else
                 break;
@@ -218,7 +218,7 @@ public class Menu {
         do{
             System.out.println("Enter a username:");
             input = scanner.nextLine();
-            if(input.equals("") || input == null)
+            if(input.equals(""))
                 System.out.println("Not a valid input");
             else
                 break;

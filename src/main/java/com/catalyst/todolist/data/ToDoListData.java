@@ -27,9 +27,9 @@ public class ToDoListData implements ToDoDao {
 
     @Override
     public void updateTask(int id, String title) {
-        for(int i=0; i < list.size(); i++) {
-            if (list.get(i).getId() == id) {
-                list.get(i).setTitle(title);
+        for (Task aList : list) {
+            if (aList.getId() == id) {
+                aList.setTitle(title);
             }
         }
     }
@@ -52,9 +52,9 @@ public class ToDoListData implements ToDoDao {
     @Override
     public ArrayList<Task> showCompleteTasks() {
         ArrayList<Task> completedList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getStatus() == Status.COMPLETE){
-                completedList.add(list.get(i));
+        for (Task aList : list) {
+            if (aList.getStatus() == Status.COMPLETE) {
+                completedList.add(aList);
             }
         }
         return completedList;
@@ -63,9 +63,9 @@ public class ToDoListData implements ToDoDao {
     @Override
     public ArrayList<Task> showIncompleteTasks() {
         ArrayList<Task> incompleteList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getStatus() == Status.INCOMPLETE){
-                incompleteList.add(list.get(i));
+        for (Task aList : list) {
+            if (aList.getStatus() == Status.INCOMPLETE) {
+                incompleteList.add(aList);
             }
         }
         return incompleteList;
@@ -90,9 +90,9 @@ public class ToDoListData implements ToDoDao {
     @Override
     public ArrayList<Task> showTasksInProgress() {
         ArrayList<Task> inProgressList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getStatus() == Status.INPROGRESS){
-                inProgressList.add(list.get(i));
+        for (Task aList : list) {
+            if (aList.getStatus() == Status.INPROGRESS) {
+                inProgressList.add(aList);
             }
         }
         return inProgressList;
@@ -106,9 +106,9 @@ public class ToDoListData implements ToDoDao {
     @Override
     public ArrayList<Task> showPastDue() {
         ArrayList<Task> pastDue = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getStatus() == Status.INCOMPLETE && list.get(i).getDueDate().isBefore(LocalDate.now())){
-                pastDue.add(list.get(i));
+        for (Task aList : list) {
+            if (aList.getStatus() == Status.INCOMPLETE && aList.getDueDate().isBefore(LocalDate.now())) {
+                pastDue.add(aList);
             }
         }
         return pastDue;
@@ -127,13 +127,28 @@ public class ToDoListData implements ToDoDao {
     @Override
     public boolean validateId(int id){
         boolean valid = false;
-        for (int i=0; i < list.size(); i++){
-            if(id == list.get(i).getId()){
+        for (Task aList : list) {
+            if (id == aList.getId()) {
                 valid = true;
             }
         }
         return valid;
     }
 
-
+    /**
+     * Check to make sure a title doesn't already exist.
+     *
+     * @param title the title the user is checking.
+     * @return a boolean on whether or not the title already exists.
+     */
+    @Override
+    public boolean validateTitle(String title) {
+        boolean exist = false;
+        for (Task aList : list) {
+            if (title.equalsIgnoreCase(aList.getTitle())) {
+                exist = true;
+            }
+        }
+        return exist;
+    }
 }
