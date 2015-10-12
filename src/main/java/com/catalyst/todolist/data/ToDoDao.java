@@ -114,4 +114,11 @@ public interface ToDoDao {
      */
     boolean validateId(int id);
 
+    /**
+     * Check to make sure a title doesn't already exist.
+     * @param title the title the user is checking.
+     * @return a boolean on whether or not the title already exists.
+     */
+    boolean validateTitle(String title);
+
 }
