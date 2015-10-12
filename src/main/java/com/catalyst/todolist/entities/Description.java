@@ -4,7 +4,7 @@ package com.catalyst.todolist.entities;
  * Created by ddelaney on 10/8/2015.
  */
 public class Description {
-    String description;
+    private String description;
 
     public Description() {
         description = "No Description";
