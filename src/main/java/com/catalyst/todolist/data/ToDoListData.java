@@ -5,6 +5,7 @@ import com.catalyst.todolist.entities.Status;
 import com.catalyst.todolist.entities.Task;
 import com.catalyst.todolist.entities.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -141,8 +142,8 @@ public class ToDoListData implements ToDoDao {
     }
 
     @Override
-    public void assignDueDate(int id) {
-
+    public void assignDueDate(int id, LocalDate newDueDate) {
+        getSingleTask(id).setDueDate(newDueDate);
     }
 
     @Override

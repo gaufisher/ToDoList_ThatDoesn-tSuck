@@ -6,7 +6,12 @@ import com.catalyst.todolist.data.ToDoListData;
 import com.catalyst.todolist.entities.Description;
 import com.catalyst.todolist.entities.User;
 
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -30,7 +35,7 @@ public class Menu {
             String input = scanner.nextLine();
             switch (input) {
                 case "1":
-                    performUpdate.addTask(getNewTitle());
+                    performUpdate.addTask(getNewTitle(), getNewDueDate(), getNewUser());
                     break;
                 case "2":
                     displayTasks(performUpdate.getTasks());
@@ -66,11 +71,12 @@ public class Menu {
                     performUpdate.assignTask(getTaskNumber(), getNewUser());
                     break;
                 case "13":
-                    performUpdate.assignDueDate(getTaskNumber());
+                    performUpdate.assignDueDate(getTaskNumber(), getNewDueDate());
                     break;
                 case "14":
                     displayTasks(performUpdate.showPastDue());
                 case "15":
+                    scanner.close();
                     return;
                 case "lol":
                     canHazMenu = true;
@@ -198,6 +204,24 @@ public class Menu {
         }while (true);
         user.setUserName(input);
         return user;
+    }
+
+    private LocalDate getNewDueDate() {
+        DateTimeFormatter dateFormatter =  DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate date;
+        String input;
+        do{
+            try {
+                System.out.println("Enter a date (MM/DD/YYYY):");
+                input = scanner.nextLine();
+                date = LocalDate.parse(input, dateFormatter);
+                break;
+            }
+           catch(DateTimeParseException e) {
+               System.out.println("Not a valid input");
+           }
+        }while (true);
+        return date;
     }
 
 }

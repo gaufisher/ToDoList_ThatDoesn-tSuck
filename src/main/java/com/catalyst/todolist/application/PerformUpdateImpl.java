@@ -6,6 +6,7 @@ import com.catalyst.todolist.entities.Task;
 import com.catalyst.todolist.entities.Description;
 import com.catalyst.todolist.entities.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -24,11 +25,10 @@ public class PerformUpdateImpl implements PerformUpdate {
         return toDoDao.getTasks();
     }
 
-    public void addTask(String title) {
+    public void addTask(String title, LocalDate newDueDate, User newUser) {
         counter++;
-        Task newTask = new Task(title, counter, Status.INCOMPLETE);
+        Task newTask = new Task(title, counter, Status.INCOMPLETE, newDueDate, newUser);
         toDoDao.addTask(newTask);
-
     }
 
     public void updateTask(int id, String title) {
@@ -71,8 +71,8 @@ public class PerformUpdateImpl implements PerformUpdate {
         return toDoDao.showTasksInProgress();
     }
 
-    public void assignDueDate(int id) {
-
+    public void assignDueDate(int id, LocalDate newDueDate) {
+        toDoDao.assignDueDate(id, newDueDate);
     }
 
     public ArrayList<Task> showPastDue() {

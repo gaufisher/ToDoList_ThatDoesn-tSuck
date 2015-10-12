@@ -1,6 +1,9 @@
 package com.catalyst.todolist.entities;
 
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 
 /**
  * Created by ddelaney on 10/8/2015.
@@ -23,12 +26,12 @@ public class Task {
     }
 
 
-    public Task(String title, int id, Status status) {
+    public Task(String title, int id, Status status,LocalDate date, User user) {
         this.title = title;
         this.id = id;
-        this.status = Status.INCOMPLETE;
-        this.dueDate = null;
-        this.user = new User();
+        this.status = status;
+        this.dueDate = date;
+        this.user = user;
         this.description = new Description();
     }
 
@@ -82,6 +85,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return id + ", " + title + ", " + status + ", " + dueDate + ", " + user.getUserName() + ", " + description;
+        return id + ", " + title + ", " + status + ", " + dueDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)) + ", " + user.getUserName() + ", " + description;
     }
 }

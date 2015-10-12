@@ -4,6 +4,7 @@ import com.catalyst.todolist.entities.Description;
 import com.catalyst.todolist.entities.Task;
 import com.catalyst.todolist.entities.User;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +29,7 @@ public interface ToDoDao {
     void assignTask(int id, User user);
     void markTaskInProgress(int id);
     ArrayList<Task> showTasksInProgress();
-    void assignDueDate(int id);
+    void assignDueDate(int id, LocalDate newDueDate);
     ArrayList<Task> showPastDue();
     Task getSingleTask(int id);
     boolean validateId(int id);
