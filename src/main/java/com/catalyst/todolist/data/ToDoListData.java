@@ -13,6 +13,14 @@ import java.util.List;
  * Created by ddelaney on 10/8/2015.
  */
 public class ToDoListData implements ToDoDao {
+    private static ToDoListData instance = null;
+    private ToDoListData(){}
+    public static ToDoListData getInstance(){
+        if(instance == null){
+            instance = new ToDoListData();
+        }
+        return instance;
+    }
     private ArrayList<Task> list = new ArrayList<>();
 
     @Override
